@@ -1,0 +1,20 @@
+node_modules/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+coverage/
+playwright-report/
+test-results/
+.dev-data/
+.test-data/
+docs/screenshots/
+
+# Keep private local data and exports out of Git.
+Theologians Workspace/
+*.sqlite
+*.sqlite3
+*.db
+Backups/
+attachments/

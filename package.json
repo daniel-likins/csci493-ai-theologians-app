@@ -1,0 +1,43 @@
+{
+  "name": "theologians",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Theologians — a local-first AI workspace for studying classic theologians",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node server/src/main.ts",
+    "stop": "node scripts/stop.mjs",
+    "dev": "node scripts/dev.mjs",
+    "build": "vite build --config web/vite.config.ts",
+    "typecheck": "tsc -p server/tsconfig.json && tsc -p web/tsconfig.json",
+    "test": "node --test --test-concurrency=1 server/test/*.test.ts",
+    "test:e2e": "playwright test -c e2e/playwright.config.ts"
+  },
+  "dependencies": {
+    "diff": "^9.0.0",
+    "fastify": "^5.12.4",
+    "fflate": "^0.8.3",
+    "pdfjs-dist": "^6.3.289",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@tanstack/react-query": "^5.102.8",
+    "@types/node": "^26.6.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "highlight.js": "^11.12.0",
+    "lucide-react": "^1.46.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-markdown": "^10.1.0",
+    "rehype-highlight": "^7.0.2",
+    "remark-gfm": "^4.0.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0"
+  }
+}

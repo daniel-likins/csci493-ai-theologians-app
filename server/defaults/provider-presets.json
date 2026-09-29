@@ -1,0 +1,86 @@
+[
+  {
+    "key": "openai",
+    "name": "OpenAI API",
+    "protocol": "openai_responses",
+    "accessType": "paid_api",
+    "baseUrl": "https://api.openai.com/v1",
+    "authType": "api_key",
+    "secretLabel": "OpenAI API key",
+    "docsUrl": "https://platform.openai.com/api-keys",
+    "summary": "Pay-as-you-go OpenAI API (Responses API).",
+    "authNotes": "Uses an API key from platform.openai.com with API billing. A ChatGPT Plus/Pro subscription does not include API access, and OpenAI's \"Sign in with ChatGPT\" is only offered for OpenAI's own apps (ChatGPT, Codex), so Theologians cannot use your ChatGPT subscription."
+  },
+  {
+    "key": "anthropic",
+    "name": "Anthropic API",
+    "protocol": "anthropic_messages",
+    "accessType": "paid_api",
+    "baseUrl": "https://api.anthropic.com/v1",
+    "authType": "api_key",
+    "secretLabel": "Anthropic API key",
+    "docsUrl": "https://platform.claude.com/",
+    "summary": "Pay-as-you-go Claude API (Messages API).",
+    "authNotes": "Uses an API key from the Claude Console with API billing. Anthropic's documentation states that third-party apps may not offer claude.ai login or use Claude Free/Pro/Max subscription credentials, so a Claude subscription cannot be used here."
+  },
+  {
+    "key": "gemini",
+    "name": "Google Gemini API",
+    "protocol": "gemini_generate_content",
+    "accessType": "paid_api",
+    "baseUrl": "https://generativelanguage.googleapis.com/v1beta",
+    "authType": "api_key",
+    "secretLabel": "Gemini API key",
+    "docsUrl": "https://aistudio.google.com/apikey",
+    "summary": "Gemini API via generateContent (free tier with limits, or paid).",
+    "authNotes": "Uses an API key from Google AI Studio. Google AI Pro/Ultra subscriptions don't provide API keys, and Google's terms prohibit using Gemini CLI's Google sign-in from other software. Note: on the free tier Google may use prompts to improve its products; check the Gemini API terms.",
+    "modelNotes": "Google now recommends its newer Interactions API; Theologians uses generateContent, which Google labels legacy but fully supported, because it is stateless (nothing stored server-side by the app's requests)."
+  },
+  {
+    "key": "alcf",
+    "name": "ALCF Inference (Argonne)",
+    "protocol": "openai_chat",
+    "accessType": "institutional",
+    "baseUrl": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+    "authType": "token_command",
+    "tokenCommand": ["python3", "/path/to/inference_auth_token.py", "get_access_token"],
+    "secretLabel": "ALCF access token",
+    "docsUrl": "https://docs.alcf.anl.gov/services/inference-endpoints/",
+    "summary": "Argonne's OpenAI-compatible inference gateway (Sophia vLLM; Metis and Minerva have their own base URLs).",
+    "authNotes": "Requires ALCF/Globus access. Run ALCF's official helper once in a terminal: `python inference_auth_token.py authenticate`. Theologians then runs `get_access_token`, which refreshes the 48-hour access token automatically. ALCF requires re-authentication every 30 days (`authenticate --force`); when that happens Theologians shows a reconnect message. You can also paste a token instead (it expires after 48 hours).",
+    "modelNotes": "Other clusters: Metis `https://inference-api.alcf.anl.gov/resource_server/metis/api/v1`, Minerva `https://inference-api.alcf.anl.gov/resource_server/minerva/api/v1`. ALCF disables Responses API streaming on shared endpoints, so this preset uses Chat Completions. Only enable tools for models ALCF marks as tool-calling capable."
+  },
+  {
+    "key": "ollama",
+    "name": "Ollama (local)",
+    "protocol": "openai_chat",
+    "accessType": "local",
+    "baseUrl": "http://127.0.0.1:11434/v1",
+    "authType": "none",
+    "docsUrl": "https://ollama.com/",
+    "summary": "Open-weight models running on this computer through Ollama's OpenAI-compatible API.",
+    "authNotes": "No credentials. Conversations stay on this computer."
+  },
+  {
+    "key": "lmstudio",
+    "name": "LM Studio (local)",
+    "protocol": "openai_chat",
+    "accessType": "local",
+    "baseUrl": "http://127.0.0.1:1234/v1",
+    "authType": "none",
+    "docsUrl": "https://lmstudio.ai/",
+    "summary": "Open-weight models running on this computer through LM Studio's local server.",
+    "authNotes": "No credentials. Conversations stay on this computer."
+  },
+  {
+    "key": "custom_openai",
+    "name": "Custom OpenAI-compatible endpoint",
+    "protocol": "openai_chat",
+    "accessType": "other",
+    "baseUrl": "",
+    "authType": "bearer_token",
+    "secretLabel": "API key or token",
+    "summary": "Any server that implements the OpenAI Chat Completions API (vLLM, institutional gateways, proxies).",
+    "authNotes": "Enter the base URL ending in /v1 and the key or token the server expects. Capabilities vary by server; set them per model."
+  }
+]
